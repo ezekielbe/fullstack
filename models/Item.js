@@ -32,7 +32,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bids: [bidSchema]  
+  bids: [bidSchema]
 }, {
   timestamps: true
 });

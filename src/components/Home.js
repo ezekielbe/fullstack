@@ -30,24 +30,26 @@ const Home = () => {
 
   const handleBidSubmit = async (e) => {
     e.preventDefault();
-  
+    console.log("Submit button clicked");
+
     if (!bidPrice || !email) {
       alert('Please enter a bid price and email.');
       return;
     }
-  
+
     try {
+      console.log("Submitting bid:", { price: bidPrice, email: email, itemId: selectedItem._id });
       const response = await axios.patch(`http://localhost:5001/api/items/${selectedItem._id}`, {
         price: bidPrice,
         email: email,
       });
-  
+
       // Update the selected item with the new bids
       setSelectedItem(response.data);
-  
+
       // Update total bids
       setTotalBids(totalBids + 1);
-  
+
       // Clear the bid form
       setBidPrice('');
       setEmail('');
@@ -55,7 +57,6 @@ const Home = () => {
       console.error('Error submitting bid:', error);
     }
   };
-  
 
   return (
     <div className="home-container">
@@ -79,7 +80,7 @@ const Home = () => {
             <>
               <h2>{selectedItem.title}</h2>
               <p>{selectedItem.description}</p>
-              <img src={`http://localhost:5001/${selectedItem.image}`} alt={selectedItem.title} />
+              <img src={`data:image/jpeg;base64,${selectedItem.image}`} alt={selectedItem.title} />
               <h3>Bids: {selectedItem.bids.length}</h3>
               <form onSubmit={handleBidSubmit}>
                 <label>
