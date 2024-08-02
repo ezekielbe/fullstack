@@ -20,11 +20,10 @@ const ItemSearch = () => {
         params: { search: searchTerm, category: category }
       });
 
-      // Ensure that response data is an array
       if (Array.isArray(response.data)) {
         setItems(response.data);
       } else {
-        setItems([]); // Fallback to empty array if data is not as expected
+        setItems([]);
       }
     } catch (error) {
       console.error('Error searching items:', error);
@@ -36,6 +35,32 @@ const ItemSearch = () => {
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
+  };
+
+  const handleBidSubmit = async (itemId, bidPrice, email) => {
+    if (!bidPrice || !email) {
+      setError('Please enter both bid price and email.');
+      return;
+    }
+
+    try {
+      const response = await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/items/${itemId}`, {
+        price: bidPrice,
+        email: email,
+      });
+
+      if (response.data) {
+        // Update the selected item with the new bid
+        setSelectedItem(prevItem => ({
+          ...prevItem,
+          bids: response.data.bids
+        }));
+        setError(null);
+      }
+    } catch (error) {
+      console.error('Error submitting bid:', error);
+      setError('Failed to submit bid');
+    }
   };
 
   return (
@@ -63,7 +88,7 @@ const ItemSearch = () => {
           <ItemList items={items} onItemClick={handleItemClick} />
           <div className="details-container">
             {selectedItem ? (
-              <ItemDetails item={selectedItem} />
+              <ItemDetails item={selectedItem} onBidSubmit={handleBidSubmit} />
             ) : (
               <p></p>
             )}
