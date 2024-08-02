@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/items');
+        const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/items');
         setItems(response.data);
 
         const total = response.data.reduce((sum, item) => sum + item.bids.length, 0);
@@ -39,7 +39,7 @@ const Home = () => {
 
     try {
       console.log("Submitting bid:", { price: bidPrice, email: email, itemId: selectedItem._id });
-      const response = await axios.patch(`http://localhost:5001/api/items/${selectedItem._id}`, {
+      const response = await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/items/${selectedItem._id}`, {
         price: bidPrice,
         email: email,
       });
