@@ -11,10 +11,14 @@ const Home = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/api/items');
-        setItems(response.data);
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/items`);
+        console.log(response.data); // Log the response to check the data structure
 
-        const total = response.data.reduce((sum, item) => sum + item.bids.length, 0);
+        // Ensure response data is an array
+        const itemsData = Array.isArray(response.data) ? response.data : [];
+        setItems(itemsData);
+
+        const total = itemsData.reduce((sum, item) => sum + item.bids.length, 0);
         setTotalBids(total);
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -68,11 +72,15 @@ const Home = () => {
         <div className="item-list">
           <h2>Items</h2>
           <ul>
-            {items.map((item) => (
-              <li key={item._id} onClick={() => selectItem(item)}>
-                {item.title}
-              </li>
-            ))}
+            {items.length > 0 ? (
+              items.map((item) => (
+                <li key={item._id} onClick={() => selectItem(item)}>
+                  {item.title}
+                </li>
+              ))
+            ) : (
+              <p>No items found</p>
+            )}
           </ul>
         </div>
         <div className="item-details">
