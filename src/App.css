@@ -1,0 +1,221 @@
+/* General Styling */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9fafb;
+  color: #333;
+  padding-top: 60px; /* Adjusted to prevent content from being blocked by the fixed header */
+}
+
+/* Header */
+header {
+  background-color: rgba(255, 255, 255, 0.95); /* Slight transparency to improve readability */
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+}
+
+header nav a {
+  color: black;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #005bb5;
+}
+
+header nav a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background-color: #0071e3;
+  transition: width 0.3s;
+  width: 0;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: 100px auto 20px auto;
+  padding: 20px;
+  padding-top: 60px; /* Ensures content doesn't overlap with header */
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Home Container */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px 20px 20px;
+}
+
+/* Total Bids Box */
+.total-bids-box {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  gap: 20px;
+}
+
+/* Item Details */
+.item-details {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-right: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  flex: 2;
+  max-height: 600px; /* Adjust height as needed */
+  overflow-y: auto; /* Add vertical scroll bar if content overflows */
+}
+
+.item-details img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Item List */
+.item-list {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  flex: 1;
+}
+
+.item-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-list li {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.item-list li:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #555;
+}
+
+form input,
+form textarea {
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #d2d2d7;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: inherit; /* Ensure consistency with the rest of the site */
+  background-color: #f5f5f7;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #0071e3;
+  box-shadow: 0 0 5px rgba(0, 113, 227, 0.2);
+}
+
+form button {
+  padding: 12px 20px;
+  background-color: #0071e3;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+form button:hover {
+  background-color: #005bb5;
+  transform: scale(1.02);
+}
+
+/* Headings */
+h1, h2 {
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+/* Links */
+a {
+  color: #0071e3;
+  transition: color 0.3s;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #005bb5;
+}
+
+/* Footer */
+footer {
+  background-color: #f9fafb;
+  color: #6e6e73;
+  text-align: center;
+  padding: 20px 0; 
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  margin-top: auto; 
+  font-size: 14px;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
+}
