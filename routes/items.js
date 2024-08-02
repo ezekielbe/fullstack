@@ -1,12 +1,14 @@
 const express = require('express');
 const multer = require('multer');
-const Item = require('../models/Item');
+const Item = require('../models/Item'); // Ensure this path is correct
 
 const router = express.Router();
 
+// Set up multer for memory storage to handle image uploads in memory
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+// POST /api/items - Upload a new item
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
@@ -23,14 +25,15 @@ router.post('/', upload.single('image'), async (req, res) => {
       bids: [],
     });
 
-    await newItem.save();
-    res.status(201).json(newItem);
+    const savedItem = await newItem.save();
+    res.status(201).json(savedItem);
   } catch (error) {
     console.error('Error saving item:', error);
     res.status(500).json({ message: 'Error saving item' });
   }
 });
 
+// GET /api/items - Get all items, with optional search and category filters
 router.get('/', async (req, res) => {
   try {
     const { search, category } = req.query;
@@ -51,20 +54,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+// PATCH /api/items/:id - Add a bid to an item
 router.patch('/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { price, email } = req.body;
+    const item = await Item.findById(req.params.id);
+    if (!item) return res.status(404).json({ message: 'Item not found' });
 
-    const item = await Item.findById(id);
-    if (!item) {
-      return res.status(404).json({ message: 'Item not found' });
-    }
+    // Add the new bid to the bids array
+    item.bids.push({
+      price: req.body.price,
+      email: req.body.email,
+      date: new Date(),
+    });
 
-    item.bids.push({ price, email });
-    await item.save();
-
-    res.json(item);
+    const updatedItem = await item.save();
+    res.json(updatedItem);
   } catch (error) {
     console.error('Error updating item:', error);
     res.status(500).json({ message: 'Error updating item' });

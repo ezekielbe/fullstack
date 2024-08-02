@@ -5,8 +5,13 @@ const Header = () => (
   <header>
     <nav>
       <Link to="/">Home</Link>
+<<<<<<< HEAD
       <Link to="/upload">Upload</Link>
       <Link to="/search">Search</Link> 
+=======
+      <Link to="/upload">Upload Item</Link>
+      <Link to="/search">Search Items</Link> 
+>>>>>>> 91ac9a82 (Initial commit)
     </nav>
   </header>
 );
