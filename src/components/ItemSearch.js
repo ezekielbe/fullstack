@@ -16,10 +16,16 @@ const ItemSearch = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('${process.env.REACT_APP_API_BASE_URL}/items', {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/items`, {
         params: { search: searchTerm, category: category }
       });
-      setItems(response.data);
+
+      // Ensure that response data is an array
+      if (Array.isArray(response.data)) {
+        setItems(response.data);
+      } else {
+        setItems([]); // Fallback to empty array if data is not as expected
+      }
     } catch (error) {
       console.error('Error searching items:', error);
       setError('Failed to search items');

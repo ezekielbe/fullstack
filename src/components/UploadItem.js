@@ -17,7 +17,7 @@ const UploadItem = () => {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/items', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/items`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -42,20 +42,20 @@ const UploadItem = () => {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Item title"
+          placeholder="Item Name"
           required
         />
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Item description"
+          placeholder="Item Description"
           required
         />
         <input
           type="text"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          placeholder="Item category"
+          placeholder="Item Category"
           required
         />
         <input
