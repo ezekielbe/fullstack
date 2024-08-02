@@ -59,7 +59,7 @@ const ItemSearch = () => {
             {selectedItem ? (
               <ItemDetails item={selectedItem} />
             ) : (
-              <p>Select an item to see the details</p>
+              <p></p>
             )}
           </div>
         </div>
